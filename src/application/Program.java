@@ -3,6 +3,7 @@ package application;
 import model.entities.Contract;
 import model.entities.Installment;
 import model.service.ContractService;
+import model.service.PaypalService;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -29,10 +30,11 @@ public class Program {
         System.out.print("Enter the number of installment: ");
         int numberInstallment = sc.nextInt();
 
-        ContractService contractService = new ContractService(null);
+        ContractService contractService = new ContractService(new PaypalService());
 
         contractService.processContract(contract, numberInstallment);
 
+        System.out.println();
         System.out.println("PARCELAS:");
 
         for (Installment installment : contract.getInstallments()) {
