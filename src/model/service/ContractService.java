@@ -1,21 +1,24 @@
 package model.service;
 
 import model.entities.Contract;
+import model.entities.Installment;
 import model.interfaces.OnlinePaymentService;
 
-public class ContractService implements OnlinePaymentService {
+import java.time.LocalDate;
 
-    public void processContract(Contract contract,Integer months) {
+public class ContractService {
 
+    private OnlinePaymentService onlinePaymentService;
+
+    public ContractService(OnlinePaymentService onlinePaymentService) {
+        this.onlinePaymentService = onlinePaymentService;
     }
 
-    @Override
-    public Double paymentFree(Double amount) {
-        return 0.0;
+
+    public void processContract(Contract contract, int months) {
+
+        contract.getInstallments().add(new Installment(LocalDate.of(2018,7,25),26.04));
+        contract.getInstallments().add(new Installment(LocalDate.of(2018,8,25),28.08));
     }
 
-    @Override
-    public Double interest(Double amount, Integer months) {
-        return 0.0;
-    }
 }
